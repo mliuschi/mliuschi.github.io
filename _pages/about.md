@@ -1,25 +1,23 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: <a href='https://www.cms.caltech.edu/'>Computing + Mathematical Sciences Department</a>, Caltech.
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: miguel.jpeg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <span style="font-size:0.85em;">mliuschi [at] caltech [dot] edu</span>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I am a fourth-year undergraduate at Caltech, studying computer science. Currently, I am a research intern in the [Learning and Perception group](https://research.nvidia.com/labs/lpr/) at [NVIDIA Research](https://www.nvidia.com/en-us/research/) and a member of [Anima Anandkumar's AI + Science lab](http://tensorlab.cms.caltech.edu/users/anima/) at Caltech. In the past, I was also a research intern at the [University of Texas Institute for Geophysics](https://ig.utexas.edu/).
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+My current research lies in the theory and applications of [**neural operators**](https://en.wikipedia.org/wiki/Neural_operators) and **operator learning**, particularly in their application to solving partial differential equations (PDEs). For instance, I have worked on developing neural operators for **forecasting in chaotic, non-stationary, and stochastic time-dependent systems**. I am very passionate about the scientific applications of machine learning and have worked on using machine learning to forecast climate tipping points, estimating glacial ice thickness, and characterizing features of the Martian terrain.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+During my undergrad, I have been very grateful for support from the [Mellon Mays Undergraduate Fellowship](https://www.mellon.org/mmuf). I was also a recipient of the [2024 Barry Goldwater scholarship](https://goldwaterscholarship.gov/).
