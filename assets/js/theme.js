@@ -1,3 +1,11 @@
+/* 
+//
+//
+NOTE!! This file has been edited to only allow for light themes (in determineThemeSetting()).
+//
+//
+*/
+
 // Has to be in the head tag, otherwise a flicker effect will occur.
 
 // Toggle through light, dark, and system theme settings.
@@ -208,11 +216,14 @@ let transTheme = () => {
 // Determine the expected state of the theme toggle, which can be "dark", "light", or
 // "system". Default is "system".
 let determineThemeSetting = () => {
-  let themeSetting = localStorage.getItem("theme");
+  /*let themeSetting = localStorage.getItem("theme");
   if (themeSetting != "dark" && themeSetting != "light" && themeSetting != "system") {
     themeSetting = "system";
   }
-  return themeSetting;
+  return themeSetting;*/
+
+  // HACK: force theme to be light
+  return "light";
 };
 
 // Determine the computed theme, which can be "dark" or "light". If the theme setting is

@@ -1,3 +1,9 @@
+# Notes from Miguel's changes:
+1. This repo currently supports _only light mode_. A bug existed in `theme.js` that had issues rendering some text if `enable_darkmode` is set to `false` in `_config.yml`. As such, I edited `determineThemeSetting` in `theme.js` to force use of the light mode. If you want to alternate between light and dark mode, please revert this edit.
+2. To prune the sitemap and prevent unnecessary pages from being tracked by web crawlers, I have also moved sample pages into `templates_files/` for later reference.
+3. Finally, please do not commit `Gemfile.lock`. This may cause issues with the deployment via GitHub pages.
+
+
 # al-folio
 
 <div align="center">

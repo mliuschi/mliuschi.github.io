@@ -5,5 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I presented our recent papers "Neural Operators with Localized Integral and Differential Kernels" and "Towards Enforcing Hard
-Physics Constraints in Operator Learning Frameworks" at ICML 2024 in Vienna!
+I presented our recent papers ["Neural Operators with Localized Integral and Differential Kernels"](https://arxiv.org/abs/2402.16845) and ["Towards Enforcing Hard Physics Constraints in Operator Learning Frameworks"](https://openreview.net/pdf?id=Zvxm14Rd1F) at ICML 2024 in Vienna!
