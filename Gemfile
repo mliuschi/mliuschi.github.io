@@ -2,9 +2,12 @@ source 'https://rubygems.org'
 group :jekyll_plugins do
     gem 'classifier-reborn'
     gem 'jekyll'
-    gem 'observer'
-    gem 'logger'
-    gem 'jekyll-archives'
+    # Add gems only for Ruby 3.4+ where they are no longer default
+    if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.4')
+        gem 'observer'
+        gem 'logger'
+    end
+      gem 'jekyll-archives'
     gem 'jekyll-email-protect'
     gem 'jekyll-feed'
     gem 'jekyll-get-json'
