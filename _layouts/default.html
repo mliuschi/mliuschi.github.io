@@ -4,28 +4,32 @@
 <body>
 <div class="wrap">
 
+  {% comment %}
+    Nav sits alone on the left. The CV lives with the social icons below, since
+    it answers the same question they do — where else to find this person.
+  {% endcomment %}
   <div class="topbar">
     <nav class="topnav">
       <a href="{{ '/' | relative_url }}"
-         {% if page.url == '/' %}aria-current="page"{% endif %}>About</a>
+         {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/about/' | relative_url }}"
+         {% if page.url == '/about/' %}aria-current="page"{% endif %}>About</a>
       <a href="{{ '/news/' | relative_url }}"
          {% if page.url == '/news/' %}aria-current="page"{% endif %}>News</a>
       <a href="{{ '/publications/' | relative_url }}"
          {% if page.url == '/publications/' %}aria-current="page"{% endif %}>Publications</a>
     </nav>
-    <a class="cv-btn" href="{{ site.cv_path | relative_url }}" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5l-5-5h3.5V3h3v7.5H17l-5 5zM4 19h16v2H4z"/></svg>
-      <span>CV</span>
-    </a>
   </div>
 
   <header class="masthead">
     <div class="portrait">
-      <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}"
-           width="480" height="480">
+      <a href="{{ '/' | relative_url }}" aria-label="Home">
+        <img src="{{ site.avatar | relative_url }}" alt="{{ site.author }}"
+             width="480" height="480">
+      </a>
     </div>
     <div class="mast-text">
-      <h1 class="name">{{ site.title }}</h1>
+      <h1 class="name"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
       <p class="tagline">{{ site.role }}<span class="sep">/</span>{{ site.affiliation_html }}</p>
       <p class="mast-email">{{ site.email_display }}</p>
       {% include socials.html %}

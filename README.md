@@ -7,12 +7,13 @@ GitHub Pages — so publishing is just `git push`, with no CI to break.
 
 | To change | Edit |
 |---|---|
-| Bio / about text | `index.md` (markdown, below the front matter) |
+| Short bio (homepage) | `index.md` (markdown, below the front matter) |
+| Long bio (`/about/`) | `about.md` |
 | News | `_data/news.yml` — add a block at the top |
 | Publications | `_bibliography/papers.bib` |
 | Which papers are on the homepage, and their order | `_data/selected.yml` |
 | Name, role, affiliation, email, social links | `_config.yml` |
-| CV | replace `assets/pdf/Miguel_Liu_Schiaffini_CV.pdf` |
+| CV | replace `assets/pdf/Miguel_Liu_Schiaffini_CV.pdf`; the link path is `cv_path` in `_config.yml` |
 | Colours, fonts, spacing | `assets/css/site.css` (`:root` at the top) |
 
 Then commit and push. The site is live in about 30 seconds.

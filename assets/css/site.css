@@ -49,14 +49,26 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Wide shell so publications use the space; prose is capped separately so body
-   copy never runs to ~95 characters a line. */
+/* Wide shell. Body text runs the full width; to pull it back in, add a
+   max-width to .prose (and .ledger .what for news). */
 .wrap { max-width: 58rem; margin: 0 auto; padding: 2.5rem 1.75rem 5rem; }
 
 a { color: var(--accent); text-decoration: none; }
 
-/* Prose links: a hairline underline that thickens into a highlight on hover. */
-.prose a, .ledger .what a {
+/* ── the one link idiom ──────────────────────────────────────────────────────
+   A hairline underline that thickens into a highlight on hover. Defined once
+   here for every body-size text link on the site, so the treatment can't drift.
+   Deliberately NOT applied to headings or publication titles: the bar grows to
+   0.38em, which reads as an underline at body size but as a highlighter stripe
+   on large or wrapped text.
+   ─────────────────────────────────────────────────────────────────────────── */
+.prose a,
+.ledger .what a,
+.topnav a,
+.tagline a,
+.more .more-t,
+.lnk,
+.u-link {
   background-image: linear-gradient(var(--accent), var(--accent));
   background-size: 100% 0.075em;
   background-position: 0 100%;
@@ -64,51 +76,27 @@ a { color: var(--accent); text-decoration: none; }
   padding-bottom: 0.05em;
   transition: background-size 0.22s cubic-bezier(0.4, 0, 0.2, 1), color 0.18s ease;
 }
-.prose a:hover, .ledger .what a:hover { background-size: 100% 0.38em; color: var(--ink); }
+.prose a:hover,
+.ledger .what a:hover,
+.topnav a:hover,
+.tagline a:hover,
+.more:hover .more-t,
+.lnk:hover,
+.u-link:hover { background-size: 100% 0.38em; color: var(--ink); }
 
 /* ── top bar ─────────────────────────────────────────────────────────────── */
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; padding-bottom: 2.5rem;
-}
-.topnav { display: flex; gap: 1.5rem; }
+/* Nav sits alone on the left now that the CV button is gone. */
+.topbar { display: flex; align-items: center; gap: 1rem; padding-bottom: 2.5rem; }
+.topnav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .topnav a {
-  position: relative; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em;
-  color: var(--muted); padding: 0.15rem 0; transition: color 0.18s ease;
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em;
+  color: var(--muted); padding-bottom: 0.15rem;
 }
-.topnav a::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
-  background: var(--accent); transform: scaleX(0); transform-origin: left;
-  transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.topnav a:hover { color: var(--ink); }
-.topnav a:hover::after { transform: scaleX(1); }
+.topnav a { background-size: 100% 0; }
+/* The current page is marked by weight and colour, NOT by an underline —
+   hover already owns the underline, so an underlined active state would make a
+   hovered inactive item look momentarily current. */
 .topnav a[aria-current] { color: var(--ink); font-weight: 600; }
-.topnav a[aria-current]::after { transform: scaleX(1); background: var(--rule-2); }
-
-.cv-btn {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  position: relative; overflow: hidden;
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em;
-  color: var(--accent); border: 1px solid var(--accent);
-  border-radius: 2rem; padding: 0.42rem 1rem;
-  transition: color 0.24s ease, border-color 0.24s ease;
-}
-/* No negative z-index: ::before paints above the button background but below the
-   positioned label, so the fill slides in behind the text safely. */
-.cv-btn::before {
-  content: ""; position: absolute; inset: 0; background: var(--accent);
-  transform: translateY(101%);
-  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.cv-btn span { position: relative; z-index: 1; }
-.cv-btn svg {
-  width: 0.8rem; height: 0.8rem; fill: currentColor;
-  position: relative; z-index: 1; transition: transform 0.24s ease;
-}
-.cv-btn:hover { color: var(--accent-ink); }
-.cv-btn:hover::before { transform: translateY(0); }
-.cv-btn:hover svg { transform: translateY(2px); }
 
 /* ── masthead ────────────────────────────────────────────────────────────── */
 .masthead {
@@ -126,12 +114,18 @@ h1.name {
   margin: 0; font-size: clamp(2rem, 5.2vw, 2.7rem); font-weight: 600;
   line-height: 1.08; letter-spacing: var(--tt);
 }
+/* Links home, but must still read as a heading: no underline, inherits colour,
+   only a quiet accent shift on hover so it's discoverable. */
+h1.name a { color: inherit; transition: color 0.18s ease; }
+h1.name a:hover { color: var(--accent); }
+.portrait a { display: block; border-radius: 50%; }
 .tagline { margin: 0.65rem 0 0; font-size: 0.97rem; color: var(--soft); }
 .tagline .sep { color: var(--rule-2); padding: 0 0.5em; }
 .mast-email { margin: 0.3rem 0 0; font-size: 0.88rem; color: var(--muted); }
 
 /* ── social icons ────────────────────────────────────────────────────────── */
-.icons { display: flex; gap: 0.45rem; margin: 1.15rem 0 0 -0.5rem; padding: 0; }
+.icons { display: flex; align-items: center; gap: 0.45rem;
+         margin: 1.15rem 0 0 -0.5rem; padding: 0; }
 .ico {
   display: grid; place-items: center; width: 2.2rem; height: 2.2rem;
   border-radius: 50%; color: var(--muted); border: 1px solid transparent;
@@ -144,6 +138,16 @@ h1.name {
   transform: translateY(-2.5px);
 }
 .ico:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* divider between the icon set and the CV text link */
+.ico-sep {
+  width: 1px; height: 1.1rem; background: var(--rule-2);
+  margin: 0 0.7rem 0 0.5rem; align-self: center; flex: 0 0 auto;
+}
+.cv-link {
+  align-self: center; font-size: 0.83rem; font-weight: 600;
+  letter-spacing: 0.01em; color: var(--accent);
+}
 
 /* ── section headings ────────────────────────────────────────────────────── */
 h2.sec {
@@ -158,7 +162,6 @@ h2.sec {
   white-space: nowrap; transition: color 0.18s ease;
 }
 .more .ar { display: inline-block; transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1); }
-.more:hover { color: var(--accent); }
 .more:hover .ar { transform: translateX(3px); }
 
 .prose { margin-top: 1.5rem; color: var(--soft); }
@@ -192,7 +195,7 @@ h2.sec {
 .ledger { list-style: none; margin: 0.4rem 0 0; padding: 0; }
 .ledger li {
   display: grid; grid-template-columns: 5.4rem 1fr; gap: 1.35rem;
-  padding: 1rem 0.6rem 1rem 0.55rem; margin: 0 -0.6rem;
+  padding: 1rem 1rem; margin: 0 -1rem;
   border-radius: 4px; border-bottom: 1px solid var(--rule);
   transition: background 0.2s ease;
 }
@@ -210,7 +213,7 @@ h2.sec {
 .pubs { margin-top: 0.45rem; }
 .pub {
   display: grid; grid-template-columns: 12rem 1fr; gap: 1.75rem;
-  padding: 1.5rem 0.6rem 1.5rem 0.55rem; margin: 0 -0.6rem;
+  padding: 1.5rem 1rem; margin: 0 -1rem;
   border-radius: 5px; border-bottom: 1px solid var(--rule);
   align-items: start; transition: background 0.22s ease;
 }
@@ -237,7 +240,7 @@ h2.sec {
 .pub:hover .thumb {
   transform: translateY(-3px) scale(1.025);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 38%, transparent),
-              0 0 0 5px var(--wash),
+              0 0 0 4px var(--wash),
               0 12px 32px -10px var(--glow);
 }
 
@@ -263,16 +266,7 @@ h2.sec {
 }
 
 .pub .row { margin: 0.65rem 0 0; display: flex; flex-wrap: wrap; gap: 0.3rem 0.95rem; }
-.lnk {
-  position: relative; font-size: 0.74rem; font-weight: 600;
-  color: var(--accent); padding-bottom: 0.1rem;
-}
-.lnk::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
-  background: currentColor; opacity: 0.28;
-  transition: opacity 0.2s ease, transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.lnk:hover::after { opacity: 1; transform: translateY(1px); }
+.lnk { font-size: 0.74rem; font-weight: 600; color: var(--accent); }
 
 /* ── equal-contribution mark ─────────────────────────────────────────────── */
 /* The glyph comes from --eq so it is set in exactly one place. Some candidate

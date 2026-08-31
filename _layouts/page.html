@@ -1,0 +1,10 @@
+---
+layout: default
+---
+{% comment %}
+  A single titled section of prose. Used by /about/ and the 404 page.
+{% endcomment %}
+<section>
+  <h2 class="sec">{{ page.heading | default: page.title }}</h2>
+  <div class="prose">{{ content }}</div>
+</section>
