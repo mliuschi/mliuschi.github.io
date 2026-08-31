@@ -1,0 +1,60 @@
+{% comment %}
+  One publication row.
+  Params:  p          a record from site.data.publications
+           show_year  true to show the year pill (homepage; the /publications/
+                      page groups by year, so it would be redundant there)
+{% endcomment %}
+{% assign p = include.p %}
+
+{% if p.thumb == "paper" and p.paper %}
+  {% assign thumb_src = p.paper | prepend: '/assets/img/paper/' %}
+  {% assign thumb_class = 'thumb is-paper' %}
+{% elsif p.figure %}
+  {% assign thumb_src = p.figure | prepend: '/assets/img/pub/' %}
+  {% assign thumb_class = 'thumb is-figure' %}
+{% else %}
+  {% assign thumb_src = nil %}
+  {% assign thumb_class = 'thumb is-empty' %}
+{% endif %}
+
+{% if p.links and p.links.size > 0 %}
+  {% assign primary = p.links[0].url %}
+{% else %}
+  {% assign primary = nil %}
+{% endif %}
+
+<article class="pub">
+  {% if primary %}
+  <a class="{{ thumb_class }}" href="{{ primary }}" target="_blank" rel="noopener"
+     aria-label="{{ p.title | escape }}">
+  {% else %}
+  <span class="{{ thumb_class }}">
+  {% endif %}
+    {% if thumb_src %}
+    <img src="{{ thumb_src | relative_url }}" alt="" loading="lazy" decoding="async">
+    {% endif %}
+  {% if primary %}</a>{% else %}</span>{% endif %}
+
+  <div class="pub-body">
+    <h3>
+      {% if primary %}
+        <a href="{{ primary }}" target="_blank" rel="noopener">{{ p.title }}</a>
+      {% else %}
+        {{ p.title }}
+      {% endif %}
+    </h3>
+    <p class="authors">{{ p.authors_html }}</p>
+    <p class="tags">
+      {% if p.venue_short %}<span class="tag">{{ p.venue_short }}</span>{% endif %}
+      {% if include.show_year %}<span class="tag yr-t">{{ p.year }}</span>{% endif %}
+      {% if p.award %}<span class="tag aw">{{ p.award }}</span>{% endif %}
+    </p>
+    {% if p.links and p.links.size > 0 %}
+    <p class="row">
+      {% for l in p.links %}
+      <a class="lnk" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>
+      {% endfor %}
+    </p>
+    {% endif %}
+  </div>
+</article>

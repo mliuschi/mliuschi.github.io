@@ -1,0 +1,36 @@
+---
+layout: default
+title: News
+permalink: /news/
+---
+<section>
+  <h2 class="sec">News</h2>
+
+  {% comment %}
+    Group by year without needing a `year:` field in news.yml. Tracking the
+    changing year across one pass keeps the data file minimal and works on any
+    Jekyll version.
+  {% endcomment %}
+  {% assign last_year = "" %}
+  {% for item in site.data.news %}
+    {% assign y = item.date | date: "%Y" %}
+    {% if y != last_year %}
+      {% unless forloop.first %}
+        </ol>
+      </div>
+      {% endunless %}
+      <div class="yr">
+        <p class="yr-head">{{ y }}</p>
+        <ol class="ledger">
+      {% assign last_year = y %}
+    {% endif %}
+        <li>
+          <span class="when">{{ item.date | date: "%b %-d" }}</span>
+          <div class="what">{{ item.text | markdownify }}</div>
+        </li>
+    {% if forloop.last %}
+        </ol>
+      </div>
+    {% endif %}
+  {% endfor %}
+</section>

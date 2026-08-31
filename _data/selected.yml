@@ -1,0 +1,20 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Which publications appear on the homepage, and in what order.
+#
+# These are BibTeX citation keys from _bibliography/papers.bib — the part before
+# the first comma in each @article{...} entry. Reorder by moving a line; remove
+# a paper from the homepage by deleting its line (it still appears on
+# /publications/, which is generated from the .bib and ordered by year).
+#
+# `python3 bin/bib2yml.py` warns if a key here does not exist in papers.bib.
+# ─────────────────────────────────────────────────────────────────────────────
+
+- liuneural
+- berner2025principled
+- li2022learning
+- azizzadenesheli2024neural
+- liu2023tipping
+- jatyani2024unifying
+- kossaifi2024library
+- duruisseaux2024towards
+- liu2022ice

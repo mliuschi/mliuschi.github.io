@@ -1,0 +1,30 @@
+---
+layout: default
+title: Publications
+permalink: /publications/
+---
+<section>
+  <h2 class="sec">Publications</h2>
+
+  {% comment %} Only show the legend if some paper actually has an equal-contribution mark. {% endcomment %}
+  {% assign has_equal = false %}
+  {% for p in site.data.publications %}
+    {% if p.authors_html contains 'class="eq"' %}{% assign has_equal = true %}{% endif %}
+  {% endfor %}
+  {% if has_equal %}
+  <p class="eq-note"><sup class="eq"></sup> denotes equal contribution.</p>
+  {% endif %}
+
+  {% comment %} Newest year first. Years are 4 digits, so a string sort is correct. {% endcomment %}
+  {% assign groups = site.data.publications | group_by: "year" | sort: "name" | reverse %}
+  {% for g in groups %}
+  <div class="yr">
+    <p class="yr-head">{{ g.name }}</p>
+    <div class="pubs">
+      {% for p in g.items %}
+        {% include publication.html p=p %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>

@@ -1,41 +1,23 @@
-FROM ruby:latest
-ENV DEBIAN_FRONTEND noninteractive
+# Local preview only. GitHub Pages builds the site itself and never sees this.
+# Installs the same `github-pages` gem GitHub runs, so preview matches production.
+FROM ruby:3.2-slim
 
-Label MAINTAINER Amir Pourmand
+RUN apt-get update -y \
+ && apt-get install -y --no-install-recommends build-essential git \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update -y && apt-get install -y --no-install-recommends \
-    locales \
-    imagemagick \
-    build-essential \
-    zlib1g-dev \
-    jupyter-nbconvert \
-    inotify-tools procps && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
-    locale-gen
-
-
-ENV LANG=en_US.UTF-8 \
-    LANGUAGE=en_US:en \
-    LC_ALL=en_US.UTF-8 \
-    JEKYLL_ENV=production
-
-RUN mkdir /srv/jekyll
-
-ADD Gemfile.lock /srv/jekyll
-ADD Gemfile /srv/jekyll
+# Bundle lives OUTSIDE /srv/jekyll on purpose: that path is bind-mounted to the
+# host at runtime, which would otherwise hide the Gemfile.lock created here.
+WORKDIR /gems
+COPY Gemfile /gems/Gemfile
+RUN bundle install --no-cache
+ENV BUNDLE_GEMFILE=/gems/Gemfile
 
 WORKDIR /srv/jekyll
+EXPOSE 8080 35729
 
-# install jekyll and dependencies
-RUN gem install jekyll bundler
-
-RUN bundle install --no-cache
-# && rm -rf /var/lib/gems/3.1.0/cache
-EXPOSE 8080
-
-COPY bin/entry_point.sh /tmp/entry_point.sh
-
-CMD ["/tmp/entry_point.sh"]
+# --force_polling: file-change events don't cross the Docker VM boundary on macOS.
+CMD ["bundle", "exec", "jekyll", "serve", \
+     "--host", "0.0.0.0", "--port", "8080", \
+     "--livereload", "--livereload-port", "35729", \
+     "--force_polling"]

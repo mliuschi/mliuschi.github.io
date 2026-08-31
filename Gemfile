@@ -1,34 +1,8 @@
-source 'https://rubygems.org'
-group :jekyll_plugins do
-    gem 'classifier-reborn'
-    gem 'jekyll'
-    # Add gems only for Ruby 3.4+ where they are no longer default
-    if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.4')
-        gem 'observer'
-        gem 'logger'
-    end
-      gem 'jekyll-archives'
-    gem 'jekyll-email-protect'
-    gem 'jekyll-feed'
-    gem 'jekyll-get-json'
-    gem 'jekyll-imagemagick'
-    gem 'jekyll-jupyter-notebook'
-    gem 'jekyll-link-attributes'
-    gem 'jekyll-minifier'
-    gem 'jekyll-paginate-v2'
-    gem 'jekyll-regex-replace'
-    gem 'jekyll-scholar'
-    gem 'jekyll-sitemap'
-    gem 'jekyll-tabs'
-    gem 'jekyll-toc'
-    gem 'jekyll-twitter-plugin'
-    gem 'jemoji'
-    gem 'mini_racer'
-    gem 'unicode_utils'
-    gem 'webrick'
-end
-group :other_plugins do
-    gem 'css_parser'
-    gem 'feedjira'
-    gem 'httparty'
-end
+source "https://rubygems.org"
+
+# The same gem GitHub Pages runs, so local preview matches production exactly.
+# This is the site's ONLY dependency.
+gem "github-pages", group: :jekyll_plugins
+
+# Jekyll 3's built-in server needs this on Ruby 3+.
+gem "webrick", "~> 1.8"

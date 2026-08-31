@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+{% if page.title and page.url != "/" %}
+  <title>{{ page.title }} · {{ site.title }}</title>
+{% else %}
+  <title>{{ site.title }} · {{ site.role }}</title>
+{% endif %}
+
+<meta name="description" content="{{ site.description | strip_newlines | strip }}">
+<meta name="author" content="{{ site.author }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+{% comment %}
+  Emoji favicon as an inline SVG data URI: no icon files to maintain, and it
+  matches what the previous site did.
+{% endcomment %}
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{{ site.icon }}</text></svg>">
+
+{% comment %} Self-hosted font: no external requests, no CDN, no tracking. {% endcomment %}
+<link rel="preload" href="{{ '/assets/fonts/schibsted-grotesk.woff2' | relative_url }}"
+      as="font" type="font/woff2" crossorigin>
+{% comment %}
+  Named site.css, not style.css: the github-pages gem defaults unthemed sites to
+  jekyll-theme-primer, whose own assets/css/style.scss compiles to
+  assets/css/style.css and would overwrite this file in _site.
+{% endcomment %}
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">

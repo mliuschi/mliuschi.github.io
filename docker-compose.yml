@@ -1,7 +1,6 @@
-# this file uses prebuilt image in dockerhub
+# Preview locally:  docker compose up --build   ->  http://localhost:8080
 services:
   jekyll:
-    image: amirpourmand/al-folio:latest
     build: .
     ports:
       - 8080:8080

@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<section>
+  <h2 class="sec">About</h2>
+  <div class="prose">{{ content }}</div>
+</section>
+
+<section>
+  <h2 class="sec">News
+    <a class="more" href="{{ '/news/' | relative_url }}">All news <span class="ar">&rarr;</span></a>
+  </h2>
+  <ol class="ledger">
+    {% for item in site.data.news limit: site.news_on_homepage %}
+    <li>
+      <span class="when">{{ item.date | date: "%b %Y" }}</span>
+      <div class="what">{{ item.text | markdownify }}</div>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+<section>
+  <h2 class="sec">Selected Publications
+    <a class="more" href="{{ '/publications/' | relative_url }}">All publications <span class="ar">&rarr;</span></a>
+  </h2>
+  <div class="pubs">
+    {% comment %}
+      Order comes from _data/selected.yml, not from the year — this list is
+      curated, so it must not be re-sorted.
+    {% endcomment %}
+    {% for key in site.data.selected %}
+      {% assign p = site.data.publications | where: "key", key | first %}
+      {% if p %}
+        {% include publication.html p=p show_year=true %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
