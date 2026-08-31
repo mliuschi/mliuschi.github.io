@@ -11,6 +11,15 @@
 # Keep the `>` and the indentation on the following lines.
 # ─────────────────────────────────────────────────────────────────────────────
 
+- date: 2026-07-03
+  text: >
+    Our paper, ["Principled approaches for extending neural architectures to function spaces for operator learning"](https://www.nature.com/articles/s42256-026-01267-z)
+    is officially published in Nature Machine Intelligence!
+
+- date: 2026-03-30
+  text: >
+    I have joined Prof. Stefano Ermon's group at Stanford!
+
 - date: 2025-07-21
   text: >
     I started my PhD at Stanford, where I'm currently rotating under

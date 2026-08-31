@@ -216,6 +216,8 @@ h2.sec {
 }
 .pub:last-child { border-bottom: 0; }
 .pub:hover { background: var(--wash); }
+/* an entry with no thumbnail gives its text the full width */
+.pub.no-thumb { grid-template-columns: 1fr; }
 
 .thumb {
   display: block; aspect-ratio: 4 / 3; background: var(--surface);

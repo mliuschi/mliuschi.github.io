@@ -42,7 +42,7 @@
   figure: "nature.jpg"
   paper: "nature.jpg"
   links:
-    - label: "Paper"
+    - label: "HTML"
       url: "https://www.nature.com/articles/s42254-024-00712-5"
 - key: "liu2022ice"
   title: "Ice Thickness From Deep Learning and Conditional Random Fields: Application to Ice-Penetrating Radar Data With Radiometric Validation"
@@ -55,11 +55,11 @@
   figure: "ice_picking.jpg"
   paper: null
   links:
-    - label: "Paper"
+    - label: "HTML"
       url: "https://ieeexplore.ieee.org/abstract/document/9916288"
 - key: "liu2023tipping"
   title: "Tipping Point Forecasting in Non-Stationary Dynamics on Function Spaces"
-  authors_html: "<strong>M. Liu-Schiaffini</strong>, C. Singer, N. Kovachki, T. Schneider, K. Azizzadenesheli, A. Anandkumar"
+  authors_html: "<strong>M. Liu-Schiaffini</strong>, C. Singer, N. Kovachki, S. Leung, H. Bae, K. Azizzadenesheli, A. Anandkumar"
   venue: "arXiv preprint arXiv:2308.08794"
   venue_short: "Preprint"
   year: 2023
@@ -70,12 +70,12 @@
   links:
     - label: "arXiv"
       url: "https://arxiv.org/abs/2308.08794"
-- key: "berner2025principled"
-  title: "Principled Approaches for Extending Neural Architectures to Function Spaces for Operator Learning"
+- key: "berner2026principled"
+  title: "Principled approaches for extending neural architectures to function spaces for operator learning"
   authors_html: "J. Berner<sup class=\"eq\"></sup>, <strong>M. Liu-Schiaffini</strong><sup class=\"eq\"></sup>, J. Kossaifi, V. Duruisseaux, B. Bonev, K. Azizzadenesheli, A. Anandkumar"
-  venue: "arXiv preprint arXiv:2506.10973"
-  venue_short: "Preprint"
-  year: 2025
+  venue: "Nature Machine Intelligence"
+  venue_short: "Nature Mach. Intell."
+  year: 2026
   award: null
   thumb: "paper"
   figure: "nn_to_no.jpg"
@@ -83,6 +83,8 @@
   links:
     - label: "arXiv"
       url: "https://arxiv.org/abs/2506.10973"
+    - label: "HTML"
+      url: "https://www.nature.com/articles/s42256-026-01267-z"
 - key: "duruisseaux2024towards"
   title: "Towards Enforcing Hard Physics Constraints in Operator Learning Frameworks"
   authors_html: "V. Duruisseaux<sup class=\"eq\"></sup>, <strong>M. Liu-Schiaffini</strong><sup class=\"eq\"></sup>, J. Berner, A. Anandkumar"
@@ -122,13 +124,13 @@
   links:
     - label: "arXiv"
       url: "https://arxiv.org/abs/2410.16290"
-    - label: "Project"
+    - label: "Project page"
       url: "https://armeet.ca/nomri"
 - key: "pan2025neural"
   title: "Neural Operators for Forward and Inverse Potential-Density Mappings in Classical Density Functional Theory"
   authors_html: "R. Pan, X. Fang, K. Azizzadenesheli, <strong>M. Liu-Schiaffini</strong>, M. Gu, J. Wu"
-  venue: "arXiv preprint arXiv:2506.06623"
-  venue_short: "Preprint"
+  venue: "The Journal of Chemical Physics"
+  venue_short: "J. Chem. Phys."
   year: 2025
   award: null
   thumb: "paper"
@@ -137,3 +139,5 @@
   links:
     - label: "arXiv"
       url: "https://arxiv.org/abs/2506.06623"
+    - label: "HTML"
+      url: "https://pubs.aip.org/aip/jcp/article/163/16/164120/3369958"

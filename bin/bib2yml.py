@@ -17,6 +17,7 @@ Recognised BibTeX fields (only title/author/year are required):
     venue                 short venue label for the tag (overrides VENUE_MAP)
     arxiv                 bare id, e.g. 2402.16845
     code, html, pdf       URLs
+    html_label            label for the `html` link (default "HTML")
     preview               figure filename in assets/img/publication_preview/
     award / award_name    award text, shown as a pill
     thumb                 `figure` to show the paper's own figure, `paper` to show
@@ -45,6 +46,8 @@ VENUE_MAP = [
     (r"nature reviews physics",                               "Nature Rev. Physics"),
     (r"ieee transactions on geoscience and remote sensing",   "IEEE TGRS"),
     (r"icml.*ai for science workshop",                        "ICML Workshop"),
+    (r"nature machine intelligence",                           "Nature Mach. Intell."),
+    (r"journal of chemical physics",                           "J. Chem. Phys."),
 ]
 
 # Surname particles that belong with the family name, not the given names.
@@ -178,9 +181,8 @@ def links_of(f):
     if f.get("arxiv"):
         out.append(("arXiv", "https://arxiv.org/abs/%s" % f["arxiv"]))
     if f.get("html"):
-        url = f["html"]
-        label = "Project" if "arxiv.org" not in url and "/nomri" in url else "Paper"
-        out.append((label, url))
+        # `html_label={...}` overrides this, e.g. for a project page.
+        out.append((f.get("html_label") or "HTML", f["html"]))
     if f.get("pdf"):
         out.append(("PDF", f["pdf"]))
     if f.get("code"):

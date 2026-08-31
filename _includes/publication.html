@@ -23,17 +23,24 @@
   {% assign primary = nil %}
 {% endif %}
 
-<article class="pub">
-  {% if primary %}
-  <a class="{{ thumb_class }}" href="{{ primary }}" target="_blank" rel="noopener"
-     aria-label="{{ p.title | escape }}">
-  {% else %}
-  <span class="{{ thumb_class }}">
-  {% endif %}
-    {% if thumb_src %}
-    <img src="{{ thumb_src | relative_url }}" alt="" loading="lazy" decoding="async">
+{% comment %}
+  With no image at all, drop the thumbnail column entirely rather than leaving an
+  empty bordered box — that happens when an entry has no `preview=` field, which
+  is easy to do by pasting fresh publisher BibTeX over an existing entry.
+{% endcomment %}
+<article class="pub{% unless thumb_src %} no-thumb{% endunless %}">
+  {% if thumb_src %}
+    {% if primary %}
+    <a class="{{ thumb_class }}" href="{{ primary }}" target="_blank" rel="noopener"
+       aria-label="{{ p.title | escape }}">
+      <img src="{{ thumb_src | relative_url }}" alt="" loading="lazy" decoding="async">
+    </a>
+    {% else %}
+    <span class="{{ thumb_class }}">
+      <img src="{{ thumb_src | relative_url }}" alt="" loading="lazy" decoding="async">
+    </span>
     {% endif %}
-  {% if primary %}</a>{% else %}</span>{% endif %}
+  {% endif %}
 
   <div class="pub-body">
     <h3>
