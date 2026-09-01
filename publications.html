@@ -9,7 +9,7 @@ permalink: /publications/
   {% comment %} Only show the legend if some paper actually has an equal-contribution mark. {% endcomment %}
   {% assign has_equal = false %}
   {% for p in site.data.publications %}
-    {% if p.authors_html contains 'class="eq"' %}{% assign has_equal = true %}{% endif %}
+    {% if p.authors contains '*' %}{% assign has_equal = true %}{% endif %}
   {% endfor %}
   {% if has_equal %}
   <p class="eq-note"><sup class="eq"></sup> denotes equal contribution.</p>

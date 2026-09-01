@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Honors & awards. Newest first — /honors/ shows all of them, and the homepage
+# shows the ones marked `featured: true` (in the order they appear here).
+#
+# Featured is deliberately a flag rather than "the most recent N", because
+# recency and significance don't line up: NSF GRFP matters more than a
+# departmental prize regardless of date.
+#
+# To add one, copy this block:
+#
+#   - year: 2026
+#     title: Name of the award
+#     org: Awarding body        # optional
+#     url: https://...          # optional, makes the title a link
+#     featured: true            # optional, shows it on the homepage
+#
+# Read directly by Jekyll, so edits show up in the preview immediately.
+# ─────────────────────────────────────────────────────────────────────────────
+
+- year: 2025
+  title: NSF Graduate Research Fellowship
+  featured: true
+
+- year: 2025
+  title: George W. Housner Prize for Academic Excellence and Original Research
+  org: Caltech
+  featured: true
+
+- year: 2025
+  title: Hertz Fellowship Finalist
+
+- year: 2024
+  title: Barry Goldwater Scholarship
+  featured: true
+
+- year: 2024
+  title: Henry Ford II Scholar Award
+  org: Caltech
+
+- year: 2022
+  title: Mellon Mays Undergraduate Fellowship

@@ -1,16 +1,13 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Which publications appear on the homepage, and in what order.
 #
-# These are BibTeX citation keys from _bibliography/papers.bib — the part before
-# the first comma in each @article{...} entry. Reorder by moving a line; remove
-# a paper from the homepage by deleting its line (it still appears on
-# /publications/, which is generated from the .bib and ordered by year).
-#
-# `python3 bin/bib2yml.py` warns if a key here does not exist in papers.bib.
+# These are `id` values from _data/publications.yml. Move a line to reorder;
+# delete a line to drop a paper from the homepage (it still appears on
+# /publications/). Read directly by Jekyll, so edits show up immediately.
 # ─────────────────────────────────────────────────────────────────────────────
 
-- liuneural
-- berner2026principled
-- li2022learning
-- azizzadenesheli2024neural
-- liu2023tipping
+- local_no
+- nn_to_no
+- mno
+- nature
+- tipping_point

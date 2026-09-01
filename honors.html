@@ -1,0 +1,18 @@
+---
+layout: default
+title: Honors & Awards
+permalink: /honors/
+---
+{% comment %}
+  Deliberately not in the top nav — reached from the homepage arrow. Flat list
+  with a year column rather than year groups, since there are usually only one
+  or two per year and grouping would look sparse.
+{% endcomment %}
+<section>
+  <h2 class="sec">Honors &amp; Awards</h2>
+  <ol class="ledger">
+    {% for a in site.data.awards %}
+      {% include award.html a=a %}
+    {% endfor %}
+  </ol>
+</section>

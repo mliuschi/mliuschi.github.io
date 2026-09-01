@@ -209,6 +209,10 @@ h2.sec {
 /* markdownify wraps each item in <p>; strip its margins rather than the tag */
 .ledger .what p { margin: 0; }
 
+/* awarding body, after an award title — reuses the .ledger row markup */
+.dim { color: var(--muted); }
+.dim::before { content: " — "; }
+
 /* ── publications ───────────────────────────────────────────────────────── */
 .pubs { margin-top: 0.45rem; }
 .pub {

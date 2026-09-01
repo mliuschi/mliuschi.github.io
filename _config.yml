@@ -31,6 +31,12 @@ socials:
 
 # How many news items appear on the homepage (the rest live on /news/).
 news_on_homepage: 5
+# How many featured honors appear on the homepage (the rest live on /honors/).
+awards_on_homepage: 3
+
+# Author name to bold in publication author lists. Must match exactly how it is
+# written in _data/publications.yml.
+author_short: "M. Liu-Schiaffini"
 
 # ── build ──
 # The github-pages gem defaults unthemed sites to jekyll-theme-primer, which

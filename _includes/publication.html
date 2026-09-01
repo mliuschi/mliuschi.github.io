@@ -1,33 +1,56 @@
 {% comment %}
   One publication row.
-  Params:  p          a record from site.data.publications
-           show_year  true to show the year pill (homepage; the /publications/
-                      page groups by year, so it would be redundant there)
+  Params:  p          an entry from site.data.publications
+           show_year  true to show the year pill (homepage; /publications/
+                      groups by year, so it would be redundant there)
 {% endcomment %}
 {% assign p = include.p %}
 
-{% if p.thumb == "paper" and p.paper %}
-  {% assign thumb_src = p.paper | prepend: '/assets/img/paper/' %}
-  {% assign thumb_class = 'thumb is-paper' %}
-{% elsif p.figure %}
-  {% assign thumb_src = p.figure | prepend: '/assets/img/pub/' %}
-  {% assign thumb_class = 'thumb is-figure' %}
-{% else %}
-  {% assign thumb_src = nil %}
-  {% assign thumb_class = 'thumb is-empty' %}
+{% comment %}
+  Which thumbnail exists on disk. site.static_files is Jekyll's own inventory of
+  what's actually there, so this stays correct without any generated file — add
+  or delete an image and the next rebuild picks it up.
+{% endcomment %}
+{% assign fig_path = '/assets/img/pub/' | append: p.id | append: '.jpg' %}
+{% assign pap_path = '/assets/img/paper/' | append: p.id | append: '.jpg' %}
+{% assign has_fig = false %}
+{% assign has_pap = false %}
+{% for f in site.static_files %}
+  {% if f.path == fig_path %}{% assign has_fig = true %}{% endif %}
+  {% if f.path == pap_path %}{% assign has_pap = true %}{% endif %}
+{% endfor %}
+
+{% comment %} thumb: figure | paper | omitted (automatic) {% endcomment %}
+{% assign thumb_src = false %}
+{% assign thumb_class = 'thumb' %}
+{% if p.thumb == 'figure' and has_fig %}
+  {% assign thumb_src = fig_path %}{% assign thumb_class = 'thumb is-figure' %}
+{% elsif p.thumb == 'paper' and has_pap %}
+  {% assign thumb_src = pap_path %}{% assign thumb_class = 'thumb is-paper' %}
+{% elsif has_pap %}
+  {% assign thumb_src = pap_path %}{% assign thumb_class = 'thumb is-paper' %}
+{% elsif has_fig %}
+  {% assign thumb_src = fig_path %}{% assign thumb_class = 'thumb is-figure' %}
 {% endif %}
 
-{% if p.links and p.links.size > 0 %}
-  {% assign primary = p.links[0].url %}
-{% else %}
-  {% assign primary = nil %}
+{% comment %} first available link, in the same fixed order as the link row {% endcomment %}
+{% assign primary = false %}
+{% if p.links.arxiv %}{% capture primary %}https://arxiv.org/abs/{{ p.links.arxiv }}{% endcapture %}
+{% elsif p.links.html %}{% assign primary = p.links.html %}
+{% elsif p.links.pdf %}{% assign primary = p.links.pdf %}
+{% elsif p.links.project %}{% assign primary = p.links.project %}
+{% elsif p.links.code %}{% assign primary = p.links.code %}
 {% endif %}
 
 {% comment %}
-  With no image at all, drop the thumbnail column entirely rather than leaving an
-  empty bordered box — that happens when an entry has no `preview=` field, which
-  is easy to do by pasting fresh publisher BibTeX over an existing entry.
+  Bold the site owner, then turn the trailing * into the equal-contribution mark.
+  Order matters: bolding first leaves the * outside the <strong>, which is where
+  it belongs.
 {% endcomment %}
+{% capture me_bold %}<strong>{{ site.author_short }}</strong>{% endcapture %}
+{% assign authors = p.authors | replace: site.author_short, me_bold %}
+{% assign authors = authors | replace: '*', '<sup class="eq"></sup>' %}
+
 <article class="pub{% unless thumb_src %} no-thumb{% endunless %}">
   {% if thumb_src %}
     {% if primary %}
@@ -50,18 +73,18 @@
         {{ p.title }}
       {% endif %}
     </h3>
-    <p class="authors">{{ p.authors_html }}</p>
+    <p class="authors">{{ authors }}</p>
     <p class="tags">
-      {% if p.venue_short %}<span class="tag">{{ p.venue_short }}</span>{% endif %}
+      {% if p.venue %}<span class="tag">{{ p.venue }}</span>{% endif %}
       {% if include.show_year %}<span class="tag yr-t">{{ p.year }}</span>{% endif %}
       {% if p.award %}<span class="tag aw">{{ p.award }}</span>{% endif %}
     </p>
-    {% if p.links and p.links.size > 0 %}
     <p class="row">
-      {% for l in p.links %}
-      <a class="lnk" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>
-      {% endfor %}
+      {% if p.links.arxiv %}<a class="lnk" href="https://arxiv.org/abs/{{ p.links.arxiv }}" target="_blank" rel="noopener">arXiv</a>{% endif %}
+      {% if p.links.html %}<a class="lnk" href="{{ p.links.html }}" target="_blank" rel="noopener">HTML</a>{% endif %}
+      {% if p.links.pdf %}<a class="lnk" href="{{ p.links.pdf }}" target="_blank" rel="noopener">PDF</a>{% endif %}
+      {% if p.links.code %}<a class="lnk" href="{{ p.links.code }}" target="_blank" rel="noopener">Code</a>{% endif %}
+      {% if p.links.project %}<a class="lnk" href="{{ p.links.project }}" target="_blank" rel="noopener">Project</a>{% endif %}
     </p>
-    {% endif %}
   </div>
 </article>

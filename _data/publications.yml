@@ -1,143 +1,114 @@
-# GENERATED FILE - do not edit by hand.
-# Source: _bibliography/papers.bib
-# Regenerate: python3 bin/bib2yml.py
-- key: "liuneural"
-  title: "Neural Operators with Localized Integral and Differential Kernels"
-  authors_html: "<strong>M. Liu-Schiaffini</strong><sup class=\"eq\"></sup>, J. Berner<sup class=\"eq\"></sup>, B. Bonev<sup class=\"eq\"></sup>, T. Kurth, K. Azizzadenesheli, A. Anandkumar"
-  venue: "41st International Conference on Machine Learning"
-  venue_short: "ICML"
-  year: 2024
-  award: "Spotlight at ICLR 2024 workshop"
-  thumb: "paper"
-  figure: "local_no.jpg"
-  paper: "local_no.jpg"
-  links:
-    - label: "arXiv"
-      url: "https://arxiv.org/abs/2402.16845"
-    - label: "Code"
-      url: "https://github.com/neuraloperator/neuraloperator"
-- key: "li2022learning"
-  title: "Learning Chaotic Dynamics in Dissipative Systems"
-  authors_html: "Z. Li<sup class=\"eq\"></sup>, <strong>M. Liu-Schiaffini</strong><sup class=\"eq\"></sup>, N. Kovachki, K. Azizzadenesheli, B. Liu, K. Bhattacharya, A. Stuart, A. Anandkumar"
-  venue: "Advances in Neural Information Processing Systems"
-  venue_short: "NeurIPS"
-  year: 2022
-  award: null
-  thumb: "figure"
-  figure: "mno.jpg"
-  paper: "mno.jpg"
-  links:
-    - label: "arXiv"
-      url: "https://arxiv.org/abs/2106.06898"
-    - label: "Code"
-      url: "https://github.com/neuraloperator/markov_neural_operator"
-- key: "azizzadenesheli2024neural"
-  title: "Neural Operators for Accelerating Scientific Simulations and Design"
-  authors_html: "K. Azizzadenesheli, N. Kovachki, Z. Li, <strong>M. Liu-Schiaffini</strong>, J. Kossaifi, A. Anandkumar"
-  venue: "Nature Reviews Physics"
-  venue_short: "Nature Rev. Physics"
-  year: 2024
-  award: null
-  thumb: "paper"
-  figure: "nature.jpg"
-  paper: "nature.jpg"
-  links:
-    - label: "HTML"
-      url: "https://www.nature.com/articles/s42254-024-00712-5"
-- key: "liu2022ice"
-  title: "Ice Thickness From Deep Learning and Conditional Random Fields: Application to Ice-Penetrating Radar Data With Radiometric Validation"
-  authors_html: "<strong>M. Liu-Schiaffini</strong>, G. Ng, C. Grima, D. Young"
-  venue: "IEEE Transactions on Geoscience and Remote Sensing"
-  venue_short: "IEEE TGRS"
-  year: 2022
-  award: null
-  thumb: "figure"
-  figure: "ice_picking.jpg"
-  paper: null
-  links:
-    - label: "HTML"
-      url: "https://ieeexplore.ieee.org/abstract/document/9916288"
-- key: "liu2023tipping"
-  title: "Tipping Point Forecasting in Non-Stationary Dynamics on Function Spaces"
-  authors_html: "<strong>M. Liu-Schiaffini</strong>, C. Singer, N. Kovachki, S. Leung, H. Bae, K. Azizzadenesheli, A. Anandkumar"
-  venue: "arXiv preprint arXiv:2308.08794"
-  venue_short: "Preprint"
-  year: 2023
-  award: null
-  thumb: "paper"
-  figure: "tipping_point.jpg"
-  paper: "tipping_point.jpg"
-  links:
-    - label: "arXiv"
-      url: "https://arxiv.org/abs/2308.08794"
-- key: "berner2026principled"
-  title: "Principled approaches for extending neural architectures to function spaces for operator learning"
-  authors_html: "J. Berner<sup class=\"eq\"></sup>, <strong>M. Liu-Schiaffini</strong><sup class=\"eq\"></sup>, J. Kossaifi, V. Duruisseaux, B. Bonev, K. Azizzadenesheli, A. Anandkumar"
-  venue: "Nature Machine Intelligence"
-  venue_short: "Nature Mach. Intell."
+# ─────────────────────────────────────────────────────────────────────────────
+# Publications. Edited by hand — Jekyll reads this file directly, so changes
+# show up in the live preview immediately. Nothing to regenerate.
+#
+# Fields:
+#   id       required. The reference handle used by _data/selected.yml, and the
+#            filename of both thumbnails:
+#              assets/img/pub/<id>.jpg     the paper's own figure
+#              assets/img/paper/<id>.jpg   generated page-1 preview
+#   authors  write initials yourself. A trailing * marks equal contribution and
+#            renders as ✳ with a legend on the publications page. Your own name
+#            is bolded automatically (see `author_short` in _config.yml).
+#   venue    the short label shown in the pill, e.g. ICML, NeurIPS, CVPR.
+#   thumb    figure | paper. Omit for automatic: the page-1 preview if one
+#            exists, otherwise the figure.
+#   links    any of arxiv (bare id), html, pdf, code, project. Rendered in that
+#            order with fixed labels. QUOTE the arxiv id — unquoted, YAML reads
+#            it as a number and 2410.16290 silently becomes 2410.1629.
+#
+# Order here does not matter — the publications page groups by year, and the
+# homepage order comes from _data/selected.yml.
+#
+# After adding an entry, run:  python3 bin/prepare.py
+# ─────────────────────────────────────────────────────────────────────────────
+
+- id: nn_to_no
+  title: Principled approaches for extending neural architectures to function spaces for operator learning
+  authors: "J. Berner*, M. Liu-Schiaffini*, J. Kossaifi, V. Duruisseaux, B. Bonev, K. Azizzadenesheli, A. Anandkumar"
+  venue: Nature Mach. Intell.
   year: 2026
-  award: null
-  thumb: "paper"
-  figure: "nn_to_no.jpg"
-  paper: "nn_to_no.jpg"
   links:
-    - label: "arXiv"
-      url: "https://arxiv.org/abs/2506.10973"
-    - label: "HTML"
-      url: "https://www.nature.com/articles/s42256-026-01267-z"
-- key: "duruisseaux2024towards"
-  title: "Towards Enforcing Hard Physics Constraints in Operator Learning Frameworks"
-  authors_html: "V. Duruisseaux<sup class=\"eq\"></sup>, <strong>M. Liu-Schiaffini</strong><sup class=\"eq\"></sup>, J. Berner, A. Anandkumar"
-  venue: "ICML 2024 AI for Science Workshop"
-  venue_short: "ICML Workshop"
-  year: 2024
-  award: null
-  thumb: "figure"
-  figure: "constraints.jpg"
-  paper: null
-  links:
-    - label: "PDF"
-      url: "https://openreview.net/pdf?id=Zvxm14Rd1F"
-- key: "kossaifi2024library"
-  title: "A Library for Learning Neural Operators"
-  authors_html: "J. Kossaifi<sup class=\"eq\"></sup>, N. Kovachki<sup class=\"eq\"></sup>, Z. Li<sup class=\"eq\"></sup>, D. Pitt<sup class=\"eq\"></sup>, <strong>M. Liu-Schiaffini</strong>, R. George, B. Bonev, K. Azizzadenesheli, J. Berner, V. Duruisseaux, A. Anandkumar"
-  venue: "arXiv preprint arXiv:2412.10354"
-  venue_short: "Preprint"
-  year: 2024
-  award: null
-  thumb: "figure"
-  figure: "neuraloperator_logo.jpg"
-  paper: "neuraloperator_logo.jpg"
-  links:
-    - label: "arXiv"
-      url: "https://arxiv.org/abs/2412.10354"
-- key: "jatyani2024unifying"
-  title: "A Unified Model for Compressed Sensing MRI Across Undersampling Patterns"
-  authors_html: "A. Jatyani, J. Wang, A. Chandrashekar, Z. Wu, <strong>M. Liu-Schiaffini</strong>, B. Tolooshams, A. Anandkumar"
-  venue: "Conference on Computer Vision & Pattern Recognition"
-  venue_short: "CVPR"
+    arxiv: "2506.10973"
+    html: "https://www.nature.com/articles/s42256-026-01267-z"
+
+- id: mri
+  title: A Unified Model for Compressed Sensing MRI Across Undersampling Patterns
+  authors: A. Jatyani, J. Wang, A. Chandrashekar, Z. Wu, M. Liu-Schiaffini, B. Tolooshams, A. Anandkumar
+  venue: CVPR
   year: 2025
-  award: null
-  thumb: "paper"
-  figure: "mri.jpg"
-  paper: "mri.jpg"
+  thumb: paper
   links:
-    - label: "arXiv"
-      url: "https://arxiv.org/abs/2410.16290"
-    - label: "Project page"
-      url: "https://armeet.ca/nomri"
-- key: "pan2025neural"
-  title: "Neural Operators for Forward and Inverse Potential-Density Mappings in Classical Density Functional Theory"
-  authors_html: "R. Pan, X. Fang, K. Azizzadenesheli, <strong>M. Liu-Schiaffini</strong>, M. Gu, J. Wu"
-  venue: "The Journal of Chemical Physics"
-  venue_short: "J. Chem. Phys."
+    project: "https://armeet.ca/nomri"
+    arxiv: "2410.16290"
+- id: no_cdft
+  title: Neural Operators for Forward and Inverse Potential-Density Mappings in Classical Density Functional Theory
+  authors: R. Pan, X. Fang, K. Azizzadenesheli, M. Liu-Schiaffini, M. Gu, J. Wu
+  venue: J. Chem. Phys.
   year: 2025
-  award: null
-  thumb: "paper"
-  figure: "no_cdft.jpg"
-  paper: "no_cdft.jpg"
   links:
-    - label: "arXiv"
-      url: "https://arxiv.org/abs/2506.06623"
-    - label: "HTML"
-      url: "https://pubs.aip.org/aip/jcp/article/163/16/164120/3369958"
+    arxiv: "2506.06623"
+    html: "https://pubs.aip.org/aip/jcp/article/163/16/164120/3369958"
+
+- id: local_no
+  title: Neural Operators with Localized Integral and Differential Kernels
+  authors: "M. Liu-Schiaffini*, J. Berner*, B. Bonev*, T. Kurth, K. Azizzadenesheli, A. Anandkumar"
+  venue: ICML
+  year: 2024
+  award: Spotlight at ICLR 2024 workshop
+  links:
+    arxiv: "2402.16845"
+    code: "https://github.com/neuraloperator/neuraloperator"
+
+- id: nature
+  title: Neural Operators for Accelerating Scientific Simulations and Design
+  authors: K. Azizzadenesheli, N. Kovachki, Z. Li, M. Liu-Schiaffini, J. Kossaifi, A. Anandkumar
+  venue: Nature Rev. Physics
+  year: 2024
+  thumb: figure
+  links:
+    html: "https://www.nature.com/articles/s42254-024-00712-5"
+
+- id: constraints
+  title: Towards Enforcing Hard Physics Constraints in Operator Learning Frameworks
+  authors: "V. Duruisseaux*, M. Liu-Schiaffini*, J. Berner, A. Anandkumar"
+  venue: ICML Workshop
+  year: 2024
+  thumb: figure
+  links:
+    pdf: "https://openreview.net/pdf?id=Zvxm14Rd1F"
+
+- id: neuraloperator_logo
+  title: A Library for Learning Neural Operators
+  authors: "J. Kossaifi*, N. Kovachki*, Z. Li*, D. Pitt*, M. Liu-Schiaffini, R. George, B. Bonev, K. Azizzadenesheli, J. Berner, V. Duruisseaux, A. Anandkumar"
+  venue: Preprint
+  year: 2024
+  thumb: figure
+  links:
+    arxiv: "2412.10354"
+- id: tipping_point
+  title: Tipping Point Forecasting in Non-Stationary Dynamics on Function Spaces
+  authors: M. Liu-Schiaffini, C. Singer, N. Kovachki, S. Leung, H. Bae, K. Azizzadenesheli, A. Anandkumar
+  venue: Preprint
+  year: 2023
+  thumb: figure
+  links:
+    arxiv: "2308.08794"
+- id: mno
+  title: Learning Chaotic Dynamics in Dissipative Systems
+  authors: "Z. Li*, M. Liu-Schiaffini*, N. Kovachki, K. Azizzadenesheli, B. Liu, K. Bhattacharya, A. Stuart, A. Anandkumar"
+  venue: NeurIPS
+  year: 2022
+  thumb: figure
+  links:
+    arxiv: "2106.06898"
+    code: "https://github.com/neuraloperator/markov_neural_operator"
+
+- id: ice_picking
+  title: "Ice Thickness From Deep Learning and Conditional Random Fields: Application to Ice-Penetrating Radar Data With Radiometric Validation"
+  authors: M. Liu-Schiaffini, G. Ng, C. Grima, D. Young
+  venue: IEEE TGRS
+  year: 2022
+  thumb: figure
+  links:
+    html: "https://ieeexplore.ieee.org/abstract/document/9916288"

@@ -31,11 +31,23 @@ layout: default
       Order comes from _data/selected.yml, not from the year — this list is
       curated, so it must not be re-sorted.
     {% endcomment %}
-    {% for key in site.data.selected %}
-      {% assign p = site.data.publications | where: "key", key | first %}
+    {% for id in site.data.selected %}
+      {% assign p = site.data.publications | where: "id", id | first %}
       {% if p %}
         {% include publication.html p=p show_year=true %}
       {% endif %}
     {% endfor %}
   </div>
+</section>
+
+<section>
+  <h2 class="sec">Honors &amp; Awards
+    <a class="more" href="{{ '/honors/' | relative_url }}"><span class="more-t">All honors</span> <span class="ar">&rarr;</span></a>
+  </h2>
+  <ol class="ledger">
+    {% assign featured = site.data.awards | where: "featured", true %}
+    {% for a in featured limit: site.awards_on_homepage %}
+      {% include award.html a=a %}
+    {% endfor %}
+  </ol>
 </section>

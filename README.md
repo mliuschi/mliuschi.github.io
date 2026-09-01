@@ -10,8 +10,9 @@ GitHub Pages — so publishing is just `git push`, with no CI to break.
 | Short bio (homepage) | `index.md` (markdown, below the front matter) |
 | Long bio (`/about/`) | `about.md` |
 | News | `_data/news.yml` — add a block at the top |
-| Publications | `_bibliography/papers.bib` |
-| Which papers are on the homepage, and their order | `_data/selected.yml` |
+| Publications | `_data/publications.yml` |
+| Which papers are on the homepage, and their order | `_data/selected.yml` (list of `id`s) |
+| Honors & awards | `_data/awards.yml` — `featured: true` puts one on the homepage |
 | Name, role, affiliation, email, social links | `_config.yml` |
 | CV | replace `assets/pdf/Miguel_Liu_Schiaffini_CV.pdf`; the link path is `cv_path` in `_config.yml` |
 | Colours, fonts, spacing | `assets/css/site.css` (`:root` at the top) |
@@ -20,43 +21,66 @@ Then commit and push. The site is live in about 30 seconds.
 
 ## Adding a publication
 
-1. Paste the BibTeX into `_bibliography/papers.bib`. Useful extra fields:
+1. Add an entry to `_data/publications.yml`:
 
-   ```bibtex
-   @article{mykey2026,
-     title={...},
-     author={Liu-Schiaffini*, Miguel and Coauthor*, Someone},
-     journal={International Conference on Machine Learning},
-     year={2026},
-     arxiv={2601.01234},            % bare id
-     code={https://github.com/...},
-     html={https://...},            % published version
-     pdf={https://...},             % direct PDF
-     venue={ICML},                  % short label for the pill (optional)
-     award={Spotlight},             % optional
-     preview={mykey.png},           % names the thumbnail files
-     thumb={figure}                 % or {paper}; omit for automatic
-   }
+   ```yaml
+   - id: mykey
+     title: Some Paper Title
+     authors: M. Liu-Schiaffini*, S. Coauthor*, A. Third
+     venue: ICML
+     year: 2026
+     award: Spotlight            # optional
+     thumb: figure               # optional: figure | paper
+     links:
+       arxiv: 2601.01234         # bare id
+       html: https://...         # published version
+       pdf: https://...
+       code: https://github.com/...
+       project: https://...
    ```
 
-   A `*` after a surname marks equal contribution and renders as ✳ with a
-   legend on the publications page.
+   Write author initials yourself. A trailing `*` marks equal contribution and
+   renders as ✳ with a legend on the publications page; your own name is bolded
+   automatically (`author_short` in `_config.yml`). Links render in a fixed
+   order with fixed labels.
 
-2. Generate its page-1 preview thumbnail:
+   `id` is the reference handle used by `_data/selected.yml`, and also names both
+   thumbnails: `assets/img/pub/<id>.jpg` and `assets/img/paper/<id>.jpg`.
+
+2. Add the `id` to `_data/selected.yml` if it belongs on the homepage.
+
+3. Build its thumbnail:
 
    ```bash
-   python3 bin/make_paper_thumbs.py
+   python3 bin/prepare.py
    ```
 
-3. Regenerate the publication data:
+Text-only changes — titles, authors, venues, links, news, awards, ordering —
+need **no command at all.** Jekyll reads these files directly, so the preview
+updates as soon as you save.
 
-   ```bash
-   python3 bin/bib2yml.py
-   ```
+## bin/prepare.py
 
-   (The pre-commit hook does this for you — see below.)
+The only script. It builds every generated image and checks the content files:
 
-4. Add the citation key to `_data/selected.yml` if it should appear on the homepage.
+```bash
+python3 bin/prepare.py           # do only the missing work (usually instant)
+python3 bin/prepare.py --force   # rebuild every image
+python3 bin/prepare.py --check   # report problems, write nothing
+```
+
+It generates the circular avatar from `assets/img/miguel.jpeg`, the figure
+thumbnails from `assets/img/publication_preview/`, and the page-1 paper previews
+by downloading each arXiv PDF and rendering it. Downloaded PDFs are deleted
+afterwards (`--keep-pdfs` to keep them).
+
+It also warns about dangling ids in `selected.yml`, duplicate ids, entries with
+no image, and orphaned images left behind by a deleted publication.
+
+Two papers have no open-access PDF and so use their figure instead: the IEEE
+TGRS ice paper (paywalled) and the ICML workshop paper (OpenReview blocks
+automated download). Both are recorded in `NO_PDF` in the script. If a paper has
+an open preprint that isn't in its `arxiv` field, add it to `PDF_OVERRIDES`.
 
 ## Local preview
 
@@ -68,17 +92,6 @@ Then open <http://localhost:8080>. Live-reloads on save. The container installs
 the same `github-pages` gem GitHub itself runs, so preview matches production.
 
 Nothing needs to be installed on the host — no Ruby, no Node.
-
-## One-time setup
-
-```bash
-bash bin/install-hooks.sh
-```
-
-Installs a pre-commit hook that regenerates `_data/publications.yml` whenever
-you commit a change to `papers.bib`, so the two cannot drift apart. If the hook
-is ever missing (say, a fresh clone), the failure mode is a stale publication
-list, not a broken site — `python3 bin/bib2yml.py` fixes it.
 
 ## Design knobs
 
@@ -101,57 +114,51 @@ Other layout values, further down the same file:
 
 ## Figure vs. paper-preview thumbnail
 
-Each publication shows one of two images, controlled by an optional `thumb=`
-field in its BibTeX entry:
+Each publication shows one of two images, controlled by an optional `thumb`
+field in `_data/publications.yml`:
 
-| `thumb=` | Shows |
+| `thumb` | Shows |
 |---|---|
-| `figure` | The paper's own figure, from `assets/img/publication_preview/` |
-| `paper` | The generated page-1 preview of the PDF |
+| `figure` | The paper's own figure, from `assets/img/pub/<id>.jpg` |
+| `paper` | The generated page-1 preview, `assets/img/paper/<id>.jpg` |
 | *omitted* | Automatic — the paper preview if one exists, otherwise the figure |
 
-```bibtex
-@article{li2022learning,
+```yaml
+- id: mno
   ...
-  preview={mno.png},
-  thumb={figure},        % this figure reads well small, so keep it
-}
+  thumb: figure        # this figure reads well small, so keep it
 ```
 
-Re-run `python3 bin/bib2yml.py` after changing it (or just commit — the hook
-does it).
+Takes effect immediately — no command needed, since Jekyll checks which images
+exist on disk at build time.
 
 Rule of thumb: use `figure` when the figure is one strong visual — a single
 field, a clean schematic, a logo. Dense multi-panel figures turn to mush at
-150px, so those are better off as the paper preview. Currently two entries are
-pinned to `figure` (`li2022learning`, `kossaifi2024library`); everything else is
-automatic.
+150px, so those are better off as the paper preview. Two entries are currently
+pinned to `figure` (`mno`, `neuraloperator_logo`).
 
-If you ask for something unavailable — `thumb={paper}` on a paper with no
-generated preview, or a typo — the script warns and falls back to whatever image
-does exist, rather than rendering an empty box.
+If you ask for something unavailable — `thumb: paper` on a paper with no
+generated preview — the page falls back to whatever image does exist rather than
+rendering an empty box, and `bin/prepare.py --check` tells you about it.
 
 ## How it fits together
 
+There is no build step for content. Every page renders straight from a file you
+edit:
+
 ```
-_bibliography/papers.bib   source of truth for publications
-        │  bin/bib2yml.py  (pre-commit hook)
-        ▼
-_data/publications.yml     generated, committed — do not hand-edit
-        │
-        ▼
-publications.html / _layouts/home.html   render via _includes/publication.html
+_data/publications.yml  ──┐
+_data/selected.yml      ──┤
+_data/news.yml          ──┼──>  Jekyll  ──>  the site
+_data/awards.yml        ──┤
+index.md / about.md     ──┘
 ```
 
-Images are generated once and committed, so the build never touches the network:
+Images are the only generated artefacts, and they are committed, so the build
+never touches the network. `bin/prepare.py` makes them.
 
-- `bin/make_images.py` — square avatar from `assets/img/miguel.jpeg`, plus
-  figure thumbnails from `assets/img/publication_preview/`
-- `bin/make_paper_thumbs.py` — page-1 paper previews into `assets/img/paper/`
-
-Two papers have no open-access PDF and therefore keep their figure thumbnail:
-the IEEE TGRS ice paper (paywalled) and the ICML workshop paper (OpenReview
-blocks automated download). Both are noted in `make_paper_thumbs.py`.
+Pages: `/` (home), `/about/`, `/news/`, `/publications/`, and `/honors/` — which
+is deliberately not in the nav, reached from the homepage arrow.
 
 ## Deployment
 

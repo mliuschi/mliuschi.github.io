@@ -1,0 +1,13 @@
+{% comment %}
+  One honour/award row. Reuses the .ledger markup that News uses, so it needs no
+  CSS of its own. Params: a (an entry from site.data.awards)
+{% endcomment %}
+{% assign a = include.a %}
+<li>
+  <span class="when">{{ a.year }}</span>
+  <div class="what">
+    {% if a.url %}<a href="{{ a.url }}" target="_blank" rel="noopener">{{ a.title }}</a>
+    {% else %}{{ a.title }}{% endif %}
+    {% if a.org %}<span class="dim">{{ a.org }}</span>{% endif %}
+  </div>
+</li>
